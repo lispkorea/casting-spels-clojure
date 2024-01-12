@@ -1,4 +1,6 @@
-# 주문걸기
+# 주문외우기
+
+- [원문](https://www.lisperati.com/casting.html)
 
  Lisp를 만져본 사람이라면, 이 언어는 다른 프로그래밍 언어들과 매우 다르다고 말할 것입니다.
  실로 놀라운 방식으로 많이 다릅니다.
@@ -37,3 +39,9 @@ REPL을 종료하려면
 
 - Window에서는 Ctrl-z를
 - macOs/Linux에서는 Ctrl-d를 누르면 됩니다.
+
+
+## 짚고넘어갈것
+
+- clj 명령어
+- REPL 종료법
