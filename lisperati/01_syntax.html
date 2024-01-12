@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+<html lang="kr" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>syntax - Casting SPELs - 한국어판</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="Casting SPELs - 한국어판">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Index.html">처음</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../lisperati/lisperati.html">lisperati</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/00_casting.html">casting</a></li><li class="chapter-item expanded "><a href="../lisperati/01_syntax.html" class="active">syntax</a></li><li class="chapter-item expanded "><a href="../lisperati/02_data.html">data</a></li><li class="chapter-item expanded "><a href="../lisperati/03_looking.html">looking</a></li><li class="chapter-item expanded "><a href="../lisperati/04_walking.html">walking</a></li><li class="chapter-item expanded "><a href="../lisperati/05_spels.html">spels</a></li><li class="chapter-item expanded "><a href="../lisperati/06_actions.html">actions</a></li><li class="chapter-item expanded "><a href="../lisperati/07_addendum.html">addendum</a></li><li class="chapter-item expanded "><a href="../lisperati/cheat.html">cheat</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Casting SPELs - 한국어판</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/lispkorea/casting-spels-clojure" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/lispkorea/casting-spels-clojure/edit/main/src/lisperati/01_syntax.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="신택스-그리고-시맨틱"><a class="header" href="#신택스-그리고-시맨틱">신택스 그리고 시맨틱</a></h1>
+<ul>
+<li><a href="https://www.lisperati.com/syntax.html">원문</a></li>
+</ul>
+<p>모든 컴퓨터 언어는 신택스(Syntax, 문법/구조론)와 시맨틱으(Semantic, 의미론)로 이루어진 코드를 가지고 있습니다.</p>
+<p>프로그래밍 언어의 신택스는 기본 골격입니다. 컴파일러가 프로그램에서 무엇이 무엇인지 알 수 있도록 프로그램이 따라야만 합니다. 이로써 무엇이 함수인지, 변수인지 등을 알 수 있습니다. 프로그램의 시맨틱은 좀 더 &quot;랜덤&quot;한 내용을 다룹니다. 무엇이 사용가능한 명령어인지, 프로그램의 특정 지점에서 어떤 변수가 허용되는지와 같은 것들이 있습니다.</p>
+<div class="table-wrapper"><table><thead><tr><th>syntax &amp; semantics</th><th></th></tr></thead><tbody>
+<tr><td>Syntax</td><td>어떻게 구성되어야 하는가</td></tr>
+<tr><td>Semantics</td><td>어떻게 동작하는가</td></tr>
+</tbody></table>
+</div>
+<p>리스프(Lisp, 리슾)의 첫 번째로 특별한 부분은 주요 프로그래밍 언어 중 가장 간결한 신택스를 가지고 있다는 점입니다. 기본적으로 리스프 신택스는 리스프 컴파일러에게 넘겨주는 텍스트를 리스트(list)로 넘기도록 강제합니다. 필요에 따라 중첩된 리스트 역시 가능합니다.</p>
+<p>리스트의 시작과 끝은 괄호로 되어있습니다:</p>
+<p><img src="../res/list.jpg" alt="" /></p>
+<p>추가적으로, 리스프 컴파일러는 코드를 읽을때 두가지 모드를 사용합니다: 코드 모드와 데이터 모드</p>
+<p>데이터 모드일때, 리스트에 아무거나 넣을 수 있습니다. 그러나, 컴파일러는 코드 모드에서 코드를 읽기 시작합니다.</p>
+<div class="table-wrapper"><table><thead><tr><th>모드</th><th>리스트</th></tr></thead><tbody>
+<tr><td>코드</td><td>리스트를 <code>코드</code>로 읽고 실행된다</td></tr>
+<tr><td>데이터</td><td>리스트를 <code>데이터</code> 자체로 취급한다.(실행하지 않는다)</td></tr>
+</tbody></table>
+</div>
+<p>코드 모드에서는 리스트는 &quot;폼(form)&quot;이라 불리는 특별한 형태의 리스트여야만 합니다.</p>
+<p><img src="../res/frame.jpg" alt="" /></p>
+<p>폼은 리스트이며, 이 리스트의 첫번째 심볼이 컴파일러가 이해할 수 있는 특별한 단어여야 합니다 - 보통은 함수의 이름이며, 컴파일러는 리스트의 나머지 부분을 함수의 인자로 넘김니다. 그리고 이러한 인자들을 읽을때, 데이타 모드로 변환하라고 지정하지 않는한, 코드 모드라 가정하고 읽습니다.</p>
+<h2 id="짚고넘어갈것"><a class="header" href="#짚고넘어갈것">짚고넘어갈것</a></h2>
+<ul>
+<li>코드모드와 데이터모드</li>
+<li>리스트</li>
+<li>폼</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../lisperati/00_casting.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../lisperati/02_data.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../lisperati/00_casting.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../lisperati/02_data.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
