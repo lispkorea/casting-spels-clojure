@@ -1,0 +1,14 @@
+[book]
+title = "Casting SPELs - 한국어판"
+description = "Casting SPELs - 한국어판"
+authors = ["netpyoung"]
+language = "kr"
+multilingual = false
+src = "src"
+
+[output.html]
+no-section-label = true
+site-url = "/casting-spels-clojure/"
+git-repository-url = "https://github.com/lispkorea/casting-spels-clojure"
+git-repository-icon = "fa-github"
+edit-url-template = "https://github.com/lispkorea/casting-spels-clojure/edit/main/{path}"
