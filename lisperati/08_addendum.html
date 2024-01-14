@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>data - Casting SPELs Clojure - 한국어판</title>
+        <title>부록 - Casting SPELs Clojure - 한국어판</title>
 
 
         <!-- Custom HTML head -->
@@ -87,7 +87,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Index.html">처음</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../lisperati/lisperati.html">lisperati</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/00_casting.html">casting</a></li><li class="chapter-item expanded "><a href="../lisperati/01_syntax.html">syntax</a></li><li class="chapter-item expanded "><a href="../lisperati/02_data.html" class="active">data</a></li><li class="chapter-item expanded "><a href="../lisperati/03_looking.html">looking</a></li><li class="chapter-item expanded "><a href="../lisperati/04_walking.html">walking</a></li><li class="chapter-item expanded "><a href="../lisperati/05_spels.html">spels</a></li><li class="chapter-item expanded "><a href="../lisperati/06_actions.html">actions</a></li><li class="chapter-item expanded "><a href="../lisperati/07_addendum.html">addendum</a></li><li class="chapter-item expanded "><a href="../lisperati/cheat.html">cheat</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Index.html">처음</a></li><li class="chapter-item expanded affix "><li class="part-title">lisperati</li><li class="chapter-item expanded "><a href="../lisperati/00_lisperati.html">lisperati</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/01_casting.html">주문외우기</a></li><li class="chapter-item expanded "><a href="../lisperati/02_syntax.html">신텍스</a></li><li class="chapter-item expanded "><a href="../lisperati/03_data.html">데이터</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/03_data-cont.html">아톰</a></li></ol></li><li class="chapter-item expanded "><a href="../lisperati/04_looking.html">둘러보기</a></li><li class="chapter-item expanded "><a href="../lisperati/05_walking.html">돌아다녀보기</a></li><li class="chapter-item expanded "><a href="../lisperati/06_spels.html">SPEL</a></li><li class="chapter-item expanded "><a href="../lisperati/07_actions.html">액션</a></li><li class="chapter-item expanded "><a href="../lisperati/08_addendum.html" class="active">부록</a></li><li class="chapter-item expanded "><a href="../lisperati/09_cheat.html">치트</a></li><li class="chapter-item expanded "><a href="../lisperati/10_ending.html">마치며</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -149,7 +149,7 @@
                         <a href="https://github.com/lispkorea/casting-spels-clojure" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/lispkorea/casting-spels-clojure/edit/main/src/lisperati/02_data.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/lispkorea/casting-spels-clojure/edit/main/src/lisperati/08_addendum.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
@@ -178,77 +178,17 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="게임-세상을-위한-데이타-정의하기"><a class="header" href="#게임-세상을-위한-데이타-정의하기">게임 세상을 위한 데이타 정의하기</a></h1>
-<ul>
-<li><a href="https://www.lisperati.com/data.html">원문</a></li>
-</ul>
-<p>폼에 대해 더 이해하기 위해, 폼으로 우리가 만들 게임 세상을 데이타화 시켜봅시다.</p>
-<p>우선, 게임에는 플레이어가 집고 사용가능한 오브젝트(Object)들이 있습니다 - 이러한 오브젝트들을 정의해 봅시다:</p>
-<pre><code class="language-clojure">(def 상수-리스트-오브젝트 '(:위스키병 :양동이 :개구리 :사슬))
-</code></pre>
-<p>자, 이제 이 줄을 분석하고 그 의미를 살펴봅시다: 리스프 컴파일러는 항상 <code>코드 모드</code>에서 읽기 시작하고 형식을 기대하기 때문에 첫 번째 기호인<code>def</code>를 명령어 라고 간주합니다.
-<code>def</code>는 define 즉 정의하다의 약자입니다.
-이 명령어는 주어진 값으로 변수를 설정합니다: 변수 이름은 <code>상수-리스트-오브젝트</code>이며, 키워드로된 오브젝트들이 리스트안에 들어있습니다.
-편의상 변하지 않는 변수 이름 앞에 <code>상수-</code>를 붙였습니다.
-이 리스트는 데이타이므로, <code>:위스키병</code>가 명령어로써 실행되지 않게 하기 위해 컴파일러를 데이타 모드로 변환시킬 필요가 있습니다.
-리스트 앞의 붙은 따옴표(<code>'</code>)는 컴파일러를 변형시키기 위한 명령어입니다.</p>
-<p>오브젝트 이름 앞에 콜론(<code>:</code>)이 붙어 있는데, 클로저(Clojure)언어에서는 이를 키워드(keyword)라 합니다. 키워드는 심볼(symbol)에 비해 비교하는 연산에서 빠릅니다.</p>
-<p><img src="../res/objects.jpg" alt="" /></p>
-<p>이제 게임 세상에 쓰일 오브젝트들을 정의해 봤습니다. 이제 더 나아가서 게임 세상의 지도를 정의해 보겠습니다. 여기에 게임 세상이 어떻게 생겼는지 나와있는 그림이 있습니다:</p>
-<p><img src="../res/world.jpg" alt="" /></p>
-<p>이 단순한 게임에는 3개의 다른 장소가 있습니다: <code>거실</code>과 <code>다락방</code>을 가진 집이 있으며 그리고 <code>정원</code>도 있습니다.</p>
-<p>이제 게임 세상을 표현하는 <code>상수-지도</code>라는 새로운 변수를 정의해 봅시다:</p>
-<pre><code class="language-clojure">(def 상수-지도
-  {:거실
-   {:설명
-    &quot;[마법사의 집 - `거실`]: `마법사`가 소파에 코를 골며 자고있다.&quot;
-    :경로 {:서쪽 [:문 :정원]
-           :위층 [:계단 :다락방]}}
-
-   :다락방
-   {:설명
-    &quot;[마법사의 집 - `다락방`]: 구석에 `용접`을 할 수 있는 화로가 있다&quot;
-    :경로 {:아래층 [:계단 :거실]}}}
-
-   :정원
-   {:설명
-    &quot;[아름다운 `정원`]: `우물`이 앞에 보인다&quot;
-    :경로 {:동쪽 [:문 :거실]}})
-</code></pre>
-<p>이 지도는 우리가 알고 싶은 세 곳에 대한 모든 중요한 내용을 담고 있습니다: 장소를 나타내는 고유한 이름 (예: 거실, 다락방, 정원), 그리고 그곳에서 볼 수 있는 것에 대한 간단한 설명 및 해당 장소로의 입출입 경로의 위치와 방법.</p>
-<p>이 변수는 더도 덜도 아닌 딱 우리가 알아야 되는 정보만을 담고 있습니다. 리스퍼는 군더더기를 빼고 보기만 해도 이해하기 쉬운 작고 간결한 코드를 작성하는 것을 좋아합니다</p>
-<p>이제 지도와 오브젝트 목록이 있으니, 각각의 오브젝트가 지도상의 장소 어디에 있는지 알 수 있는 변수를 선언해 봅시다:</p>
-<pre><code class="language-clojure">(def 상수-사전-오브젝트-랑-장소
-  {:위스키병 :거실
-   :양동이   :거실
-   :사슬     :정원
-   :개구리   :정원})
-</code></pre>
-<p>여기서, 사전을 만들어서 오브젝트랑 장소를 각각 연결하였습니다. 사전(dictionary)은 키와 값으로 되어있는 컬렉션(collection)입니다. 리스트와 비슷하게 중괄호(<code>{ }</code>)로 둘러싸여 있습니다.
-이 사전은 오브젝트를 키로, 장소를 값으로 가지고 있습니다. 그리고 이 장소는 지도의 키로도 쓰입니다.
-여기 <code>:거실</code>, <code>:정원</code>, <code>:다락방</code> 이라는 장소를 나타내는 세 개의 키가 있습니다.</p>
-<p>게임 세상과 그 안에 있는 오브젝트들을 정의했으니, 이제 게임 플레이어의 장소만 남았습니다.</p>
-<pre><code class="language-clojure">(def 상수-플레이어-시작-장소
-  :거실)
-</code></pre>
-<p>자, 이제 게임에 쓰일 게임 명령어들을 만들러 갑시나!</p>
-<p><img src="../res/drink.jpg" alt="" /></p>
-<h2 id="짚고넘어갈것"><a class="header" href="#짚고넘어갈것">짚고넘어갈것</a></h2>
-<ul>
-<li><a href="https://clojuredocs.org/clojure.core/def">def</a></li>
-<li>키워드(<code>:</code>)</li>
-<li>사전</li>
-</ul>
+                        <h1 id="부록"><a class="header" href="#부록">부록</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../lisperati/01_syntax.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../lisperati/07_actions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../lisperati/03_looking.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../lisperati/09_cheat.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -258,11 +198,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../lisperati/01_syntax.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../lisperati/07_actions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../lisperati/03_looking.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../lisperati/09_cheat.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

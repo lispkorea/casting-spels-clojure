@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>walking - Casting SPELs Clojure - 한국어판</title>
+        <title>아톰 - Casting SPELs Clojure - 한국어판</title>
 
 
         <!-- Custom HTML head -->
@@ -87,7 +87,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Index.html">처음</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../lisperati/lisperati.html">lisperati</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/00_casting.html">casting</a></li><li class="chapter-item expanded "><a href="../lisperati/01_syntax.html">syntax</a></li><li class="chapter-item expanded "><a href="../lisperati/02_data.html">data</a></li><li class="chapter-item expanded "><a href="../lisperati/03_looking.html">looking</a></li><li class="chapter-item expanded "><a href="../lisperati/04_walking.html" class="active">walking</a></li><li class="chapter-item expanded "><a href="../lisperati/05_spels.html">spels</a></li><li class="chapter-item expanded "><a href="../lisperati/06_actions.html">actions</a></li><li class="chapter-item expanded "><a href="../lisperati/07_addendum.html">addendum</a></li><li class="chapter-item expanded "><a href="../lisperati/cheat.html">cheat</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Index.html">처음</a></li><li class="chapter-item expanded affix "><li class="part-title">lisperati</li><li class="chapter-item expanded "><a href="../lisperati/00_lisperati.html">lisperati</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/01_casting.html">주문외우기</a></li><li class="chapter-item expanded "><a href="../lisperati/02_syntax.html">신텍스</a></li><li class="chapter-item expanded "><a href="../lisperati/03_data.html">데이터</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/03_data-cont.html" class="active">아톰</a></li></ol></li><li class="chapter-item expanded "><a href="../lisperati/04_looking.html">둘러보기</a></li><li class="chapter-item expanded "><a href="../lisperati/05_walking.html">돌아다녀보기</a></li><li class="chapter-item expanded "><a href="../lisperati/06_spels.html">SPEL</a></li><li class="chapter-item expanded "><a href="../lisperati/07_actions.html">액션</a></li><li class="chapter-item expanded "><a href="../lisperati/08_addendum.html">부록</a></li><li class="chapter-item expanded "><a href="../lisperati/09_cheat.html">치트</a></li><li class="chapter-item expanded "><a href="../lisperati/10_ending.html">마치며</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -149,7 +149,7 @@
                         <a href="https://github.com/lispkorea/casting-spels-clojure" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/lispkorea/casting-spels-clojure/edit/main/src/lisperati/04_walking.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/lispkorea/casting-spels-clojure/edit/main/src/lisperati/03_data-cont.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
@@ -178,17 +178,77 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="walking"><a class="header" href="#walking">walking</a></h1>
+                        <h1 id="게임-세상을-위한-데이타-정의하기---계속"><a class="header" href="#게임-세상을-위한-데이타-정의하기---계속">게임 세상을 위한 데이타 정의하기 - 계속</a></h1>
+<p>앞서 <code>def</code>를 이용해서 정의한 변수는 상수라고 했습니다. 즉, 한번 정의되면 그 값을 바꿀 수 없습니다.</p>
+<p>그런데 게임에서는 상수가 아닌 변수가 필요합니다. 예를 들어 플레이어가 어떤 물건을 들고 있을때, 그 물건을 다른 물건으로 바꾸거나, 물건을 버릴 수 있어야 합니다.</p>
+<p>클로저에는 이렇게 상태를 가지는 변수를 지정 할 수 있는 여러가지 타입들을 제공합니다. 그중에서도 가장 간단한 <code>atom</code>을 이용해서 변수를 정의해 보겠습니다.</p>
+<p>편의상 <code>atom</code>변수는 <code>atom_</code>를 붙여서 정의하도록 하겠습니다.</p>
+<pre><code class="language-clojure">;; 변수.
+(def atom_플레이어_사전_오브젝트_랑_장소
+  (atom 상수_사전_오브젝트_랑_장소))
+
+(def atom_플레이어_현재장소
+  (atom 상수_플레이어_시작_장소))
+
+(def atom_플레이어_사슬을_용접하였는가
+  (atom false))
+
+(def atom_플레이어_양동이를_채웠는가
+  (atom false))
+</code></pre>
+<p>아래는 <code>atom</code>의 간단한 사용법입니다.</p>
+<pre><code class="language-clojure">&gt; (def atom_테스트 (atom 1))
+&gt; atom_테스트
+#object[clojure.lang.Atom 0x4aac85fa {:status :ready, :val 1}]
+
+;; atom의 값을 가져오려면 deref를 사용
+&gt; (deref atom_테스트)
+=&gt; 1
+
+;; deref와 @는 같은 의미
+&gt; @atom_테스트
+=&gt; 1
+
+;; 강제로 셋팅
+&gt; (reset! atom_테스트 2)
+&gt; @atom_테스트
+=&gt; 2
+
+;; 함수 적용
+&gt; (swap! atom_테스트 + 1 2 3)
+&gt; @atom_테스트
+=&gt; 8
+</code></pre>
+<p>이제 플레이어 정보를 초기화 시켜주는 함수 역시 정의해 보겠습니다.</p>
+<pre><code class="language-clojure">(defn 초기화 []
+  (reset! atom_플레이어_사전_오브젝트_랑_장소 상수_사전_오브젝트_랑_장소)
+  (reset! atom_플레이어_현재장소              상수_플레이어_시작_장소)
+  (reset! atom_플레이어_사슬을_용접하였는가   false)
+  (reset! atom_플레이어_양동이를_채웠는가     false))
+</code></pre>
+<p><code>defn</code>은 <code>define function</code>의 약자로 함수를 정의합니다. 여기서는 아무런 인자도 받지 않고 있습니다. <code>초기화</code>함수는 플레이어의 atom변수들을 초기화하는 역할을 합니다.</p>
+<h2 id="짚고넘어갈것"><a class="header" href="#짚고넘어갈것">짚고넘어갈것</a></h2>
+<ul>
+<li><a href="https://clojuredocs.org/clojure.core/atom">atom</a></li>
+<li><a href="https://clojuredocs.org/clojure.core/deref">deref</a>, @</li>
+<li><a href="https://clojuredocs.org/clojure.core/reset!">reset!</a></li>
+<li><a href="https://clojuredocs.org/clojure.core/swap!">swap!</a></li>
+<li><a href="https://clojuredocs.org/clojure.core/defn">defn</a></li>
+</ul>
+<h2 id="참고"><a class="header" href="#참고">참고</a></h2>
+<ul>
+<li><a href="https://clojure.wladyka.eu/posts/share-state/">https://clojure.wladyka.eu/posts/share-state/</a></li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../lisperati/03_looking.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../lisperati/03_data.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../lisperati/05_spels.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../lisperati/04_looking.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -198,11 +258,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../lisperati/03_looking.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../lisperati/03_data.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../lisperati/05_spels.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../lisperati/04_looking.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
