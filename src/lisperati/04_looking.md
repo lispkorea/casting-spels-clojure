@@ -242,6 +242,5 @@ true
 - [mapv](https://clojuredocs.org/clojure.core/mapv)
 - [fn](https://clojuredocs.org/clojure.core/fn)
 - [filter](https://clojuredocs.org/clojure.core/filter)
-- [quote](https://clojuredocs.org/clojure.core/quote) / unquote(back-quoting)
 - [->](https://clojuredocs.org/clojure.core/-%3E): thread-first
 - [->>](https://clojuredocs.org/clojure.core/-%3E%3E): thread-last

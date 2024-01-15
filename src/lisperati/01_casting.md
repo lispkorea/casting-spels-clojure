@@ -1,4 +1,4 @@
-# 주문외우기
+# Casting SPELs (Clojure)
 
 - [원문](https://www.lisperati.com/casting.html)
 
