@@ -87,7 +87,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Index.html">처음</a></li><li class="chapter-item expanded affix "><li class="part-title">lisperati</li><li class="chapter-item expanded "><a href="../lisperati/00_lisperati.html">lisperati</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/01_casting.html">주문외우기</a></li><li class="chapter-item expanded "><a href="../lisperati/02_syntax.html">신텍스</a></li><li class="chapter-item expanded "><a href="../lisperati/03_data.html">데이터</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/03_data-cont.html" class="active">아톰</a></li></ol></li><li class="chapter-item expanded "><a href="../lisperati/04_looking.html">둘러보기</a></li><li class="chapter-item expanded "><a href="../lisperati/05_walking.html">돌아다녀보기</a></li><li class="chapter-item expanded "><a href="../lisperati/06_spels.html">SPEL</a></li><li class="chapter-item expanded "><a href="../lisperati/07_actions.html">액션</a></li><li class="chapter-item expanded "><a href="../lisperati/08_addendum.html">부록</a></li><li class="chapter-item expanded "><a href="../lisperati/09_cheat.html">치트</a></li><li class="chapter-item expanded "><a href="../lisperati/10_ending.html">마치며</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Index.html">처음</a></li><li class="chapter-item expanded affix "><li class="part-title">lisperati</li><li class="chapter-item expanded "><a href="../lisperati/00_lisperati.html">lisperati</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/01_casting.html">Casting SPELs (Clojure)</a></li><li class="chapter-item expanded "><a href="../lisperati/02_syntax.html">신텍스</a></li><li class="chapter-item expanded "><a href="../lisperati/03_data.html">데이터</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/03_data-cont.html" class="active">아톰</a></li></ol></li><li class="chapter-item expanded "><a href="../lisperati/04_looking.html">둘러보기</a></li><li class="chapter-item expanded "><a href="../lisperati/05_walking.html">돌아다녀보기</a></li><li class="chapter-item expanded "><a href="../lisperati/06_spels.html">스펠 외우기</a></li><li class="chapter-item expanded "><a href="../lisperati/07_actions.html">특별한 액션 만들기</a></li><li class="chapter-item expanded "><a href="../lisperati/08_addendum.html">부록</a></li><li class="chapter-item expanded "><a href="../lisperati/09_cheat.html">치트</a></li><li class="chapter-item expanded "><a href="../lisperati/10_ending.html">마치며</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -224,7 +224,8 @@
   (reset! atom_플레이어_사전_오브젝트_랑_장소 상수_사전_오브젝트_랑_장소)
   (reset! atom_플레이어_현재장소              상수_플레이어_시작_장소)
   (reset! atom_플레이어_사슬을_용접하였는가   false)
-  (reset! atom_플레이어_양동이를_채웠는가     false))
+  (reset! atom_플레이어_양동이를_채웠는가     false)
+  :초기화완료)
 </code></pre>
 <p><code>defn</code>은 <code>define function</code>의 약자로 함수를 정의합니다. 여기서는 아무런 인자도 받지 않고 있습니다. <code>초기화</code>함수는 플레이어의 atom변수들을 초기화하는 역할을 합니다.</p>
 <h2 id="짚고넘어갈것"><a class="header" href="#짚고넘어갈것">짚고넘어갈것</a></h2>

@@ -87,7 +87,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Index.html">처음</a></li><li class="chapter-item expanded affix "><li class="part-title">lisperati</li><li class="chapter-item expanded "><a href="../lisperati/00_lisperati.html">lisperati</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/01_casting.html">주문외우기</a></li><li class="chapter-item expanded "><a href="../lisperati/02_syntax.html">신텍스</a></li><li class="chapter-item expanded "><a href="../lisperati/03_data.html">데이터</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/03_data-cont.html">아톰</a></li></ol></li><li class="chapter-item expanded "><a href="../lisperati/04_looking.html">둘러보기</a></li><li class="chapter-item expanded "><a href="../lisperati/05_walking.html">돌아다녀보기</a></li><li class="chapter-item expanded "><a href="../lisperati/06_spels.html">SPEL</a></li><li class="chapter-item expanded "><a href="../lisperati/07_actions.html">액션</a></li><li class="chapter-item expanded "><a href="../lisperati/08_addendum.html">부록</a></li><li class="chapter-item expanded "><a href="../lisperati/09_cheat.html" class="active">치트</a></li><li class="chapter-item expanded "><a href="../lisperati/10_ending.html">마치며</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Index.html">처음</a></li><li class="chapter-item expanded affix "><li class="part-title">lisperati</li><li class="chapter-item expanded "><a href="../lisperati/00_lisperati.html">lisperati</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/01_casting.html">Casting SPELs (Clojure)</a></li><li class="chapter-item expanded "><a href="../lisperati/02_syntax.html">신텍스</a></li><li class="chapter-item expanded "><a href="../lisperati/03_data.html">데이터</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/03_data-cont.html">아톰</a></li></ol></li><li class="chapter-item expanded "><a href="../lisperati/04_looking.html">둘러보기</a></li><li class="chapter-item expanded "><a href="../lisperati/05_walking.html">돌아다녀보기</a></li><li class="chapter-item expanded "><a href="../lisperati/06_spels.html">스펠 외우기</a></li><li class="chapter-item expanded "><a href="../lisperati/07_actions.html">특별한 액션 만들기</a></li><li class="chapter-item expanded "><a href="../lisperati/08_addendum.html">부록</a></li><li class="chapter-item expanded "><a href="../lisperati/09_cheat.html" class="active">치트</a></li><li class="chapter-item expanded "><a href="../lisperati/10_ending.html">마치며</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -178,7 +178,88 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="치트"><a class="header" href="#치트">치트</a></h1>
+                        <pre><code class="language-clojure">&gt; (둘러보기)
+[&quot;[마법사의 집 - `거실`]: `마법사`가 소파에 코를 골며 자고있다.&quot;
+ &quot;`서쪽`으로 가는 문이 있다&quot;
+ &quot;`위층`으로 가는 계단이 있다&quot;
+ &quot;`위스키병`(이/가) 바닦에 있다&quot;
+ &quot;`양동이`(이/가) 바닦에 있다&quot;]
+
+&gt; (집어들기 양동이)
+[&quot;`양동이`(을/를) 집어들었습니다&quot;]
+
+&gt; (플레이어-오브젝트-리스트-가져오기)
+(:양동이)
+
+&gt; (이동 위층)
+[&quot;[마법사의 집 - `다락방`]: 구석에 `용접`을 할 수 있는 화로가 있다&quot;
+ &quot;`아래층`으로 가는 계단이 있다&quot;]
+
+&gt; (이동 동쪽)
+[&quot;그쪽으로 갈 수 없습니다&quot;]
+
+&gt; (이동 아래층)
+[&quot;[마법사의 집 - `거실`]: `마법사`가 소파에 코를 골며 자고있다.&quot;
+ &quot;`서쪽`으로 가는 문이 있다&quot;
+ &quot;`위층`으로 가는 계단이 있다&quot;
+ &quot;`위스키병`(이/가) 바닦에 있다&quot;]
+
+&gt; (이동 서쪽)
+[&quot;[아름다운 `정원`]: `우물`이 앞에 보인다&quot;
+ &quot;`동쪽`으로 가는 문이 있다&quot;
+ &quot;`개구리`(이/가) 바닦에 있다&quot;
+ &quot;`사슬`(이/가) 바닦에 있다&quot;]
+
+&gt; (물기르기 양동이 우물)
+[&quot;물에 닿지 않습니다.&quot;]
+
+&gt; (집어들기 사슬)
+[&quot;`사슬`(을/를) 집어들었습니다&quot;]
+
+&gt; (플레이어-오브젝트-리스트-가져오기)
+(:양동이 :사슬)
+
+&gt; (이동 동쪽)
+[&quot;[마법사의 집 - `거실`]: `마법사`가 소파에 코를 골며 자고있다.&quot;
+ &quot;`서쪽`으로 가는 문이 있다&quot;
+ &quot;`위층`으로 가는 계단이 있다&quot;
+ &quot;`위스키병`(이/가) 바닦에 있다&quot;]
+
+&gt; (끼얹기 양동이 마법사)
+[&quot;`양동이`가 비어있습니다&quot;]
+
+&gt; (이동 위층)
+[&quot;[마법사의 집 - `다락방`]: 구석에 `용접`을 할 수 있는 화로가 있다&quot;
+ &quot;`아래층`으로 가는 계단이 있다&quot;]
+
+&gt; (용접 사슬 양동이)
+[&quot;`사슬`이 `양동이`에 단단히 용접되었습니다.&quot;]
+
+&gt; (이동 아래층)
+[&quot;[마법사의 집 - `거실`]: `마법사`가 소파에 코를 골며 자고있다.&quot;
+ &quot;`서쪽`으로 가는 문이 있다&quot;
+ &quot;`위층`으로 가는 계단이 있다&quot;
+ &quot;`위스키병`(이/가) 바닦에 있다&quot;]
+
+&gt; (이동 서쪽)
+[&quot;[아름다운 `정원`]: `우물`이 앞에 보인다&quot;
+ &quot;`동쪽`으로 가는 문이 있다&quot;
+ &quot;`개구리`(이/가) 바닦에 있다&quot;]
+
+&gt; (물기르기 양동이 우물)
+[&quot;`양동이`에 물을 가득 채웠습니다.&quot;]
+
+&gt; (이동 동쪽)
+[&quot;[마법사의 집 - `거실`]: `마법사`가 소파에 코를 골며 자고있다.&quot;
+ &quot;`서쪽`으로 가는 문이 있다&quot;
+ &quot;`위층`으로 가는 계단이 있다&quot;
+ &quot;`위스키병`(이/가) 바닦에 있다&quot;]
+
+&gt; (끼얹기 양동이 마법사)
+[&quot;`마법사`는 잠에서 깨고, `당신`을 따뜻히 맞아주었습니다.&quot;
+ &quot;그는 (저탄수)도넛을 `당신`에게 건냈습니다.&quot;
+ &quot;성공! 게임 끝.&quot;]
+</code></pre>
 
                     </main>
 

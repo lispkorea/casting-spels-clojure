@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>SPEL - Casting SPELs Clojure - 한국어판</title>
+        <title>스펠 외우기 - Casting SPELs Clojure - 한국어판</title>
 
 
         <!-- Custom HTML head -->
@@ -87,7 +87,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Index.html">처음</a></li><li class="chapter-item expanded affix "><li class="part-title">lisperati</li><li class="chapter-item expanded "><a href="../lisperati/00_lisperati.html">lisperati</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/01_casting.html">주문외우기</a></li><li class="chapter-item expanded "><a href="../lisperati/02_syntax.html">신텍스</a></li><li class="chapter-item expanded "><a href="../lisperati/03_data.html">데이터</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/03_data-cont.html">아톰</a></li></ol></li><li class="chapter-item expanded "><a href="../lisperati/04_looking.html">둘러보기</a></li><li class="chapter-item expanded "><a href="../lisperati/05_walking.html">돌아다녀보기</a></li><li class="chapter-item expanded "><a href="../lisperati/06_spels.html" class="active">SPEL</a></li><li class="chapter-item expanded "><a href="../lisperati/07_actions.html">액션</a></li><li class="chapter-item expanded "><a href="../lisperati/08_addendum.html">부록</a></li><li class="chapter-item expanded "><a href="../lisperati/09_cheat.html">치트</a></li><li class="chapter-item expanded "><a href="../lisperati/10_ending.html">마치며</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../Index.html">처음</a></li><li class="chapter-item expanded affix "><li class="part-title">lisperati</li><li class="chapter-item expanded "><a href="../lisperati/00_lisperati.html">lisperati</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/01_casting.html">Casting SPELs (Clojure)</a></li><li class="chapter-item expanded "><a href="../lisperati/02_syntax.html">신텍스</a></li><li class="chapter-item expanded "><a href="../lisperati/03_data.html">데이터</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lisperati/03_data-cont.html">아톰</a></li></ol></li><li class="chapter-item expanded "><a href="../lisperati/04_looking.html">둘러보기</a></li><li class="chapter-item expanded "><a href="../lisperati/05_walking.html">돌아다녀보기</a></li><li class="chapter-item expanded "><a href="../lisperati/06_spels.html" class="active">스펠 외우기</a></li><li class="chapter-item expanded "><a href="../lisperati/07_actions.html">특별한 액션 만들기</a></li><li class="chapter-item expanded "><a href="../lisperati/08_addendum.html">부록</a></li><li class="chapter-item expanded "><a href="../lisperati/09_cheat.html">치트</a></li><li class="chapter-item expanded "><a href="../lisperati/10_ending.html">마치며</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -178,7 +178,102 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="spel"><a class="header" href="#spel">SPEL</a></h1>
+                        <h1 id="스펠-외우기"><a class="header" href="#스펠-외우기">스펠 외우기</a></h1>
+<ul>
+<li><a href="https://www.lisperati.com/spels.html">원문</a></li>
+</ul>
+<p>이제 리스프의 놀랍도록 강력한 기능을 배워보겠습니다: SPEL 만들기!</p>
+<p>스펠(마법, <code>SPEL</code>)은 <code>S</code>emantic <code>P</code>rogram <code>E</code>nhancement <code>L</code>ogic의 줄임말로, 컴퓨터 코드의 세계 내부에 새로운 동작을 생성하여 필요에 맞게 동작을 사용자 정의하기 위해 기본적인 수준에서 Lisp 언어를 변경하는 것으로, Lisp에서 가장 마법처럼 보이는 부분입니다.
+스펠을 사용하려면 먼저 리스프 컴파일러 내에서 스펠을 활성화 시켜야 합니다.</p>
+<pre><code class="language-clojure">(defmacro def-스펠 [&amp; rest]
+  `(defmacro ~@rest))
+</code></pre>
+<p>좋습니다. 이제 활성화 되었습니다. 이제 첫 스펠<code>이동</code>을 외워봅시다:</p>
+<pre><code class="language-clojure">(def-스펠 이동 [방향]
+  `(방향으로걷기! ~(keyword 방향)))
+</code></pre>
+<ul>
+<li><code>keyword</code>
+<ul>
+<li>ex) <code>(keyword '서쪽)</code> =&gt; <code>:서쪽</code></li>
+</ul>
+</li>
+</ul>
+<p>이 코드가 하는 일은 리스프 컴파일러에게 <code>이동</code>라는 단어가 실제로는 <code>방향으로걷기!</code>라는 단어이며, 내부적으로 인자로 들어온 방향(ex <code>서쪽</code>)을 키워드방향(ex <code>:서쪽</code>)으로 만들어 줍니다.
+코드를 완전히 컴파일하기 전에 다른 것으로 변경하는 특수한 코드를 프로그램과 컴파일러 사이에 몰래 삽입할 수 있습니다:</p>
+<p><img src="../res/spel_compile.jpg" alt="" /></p>
+<p>리스프에서는 코드와 데이터가 거의 동일하게 보입니다. 매우 일관되고 깔끔한 디자인입니다! 새로운 스펠을 사용해 봅시다:</p>
+<pre><code class="language-clojure">&gt; (이동 서쪽)
+;; (방향으로걷기! :서쪽)
+
+[&quot;[아름다운 `정원`]: `우물`이 앞에 보인다&quot;
+ &quot;`동쪽`으로 가는 문이 있다&quot;
+ &quot;`개구리`(이/가) 바닦에 있다&quot;
+ &quot;`사슬`(이/가) 바닦에 있다&quot;]
+</code></pre>
+<p>훨씬 나아졌습니다!</p>
+<p>이제 게임 세상에서 오브젝트를 집는 함수를 만들어 보도록 하겠습니다:</p>
+<pre><code class="language-clojure">(defn 오브젝트-집기! [오브젝트]
+  (let [오브젝트이름 (name 오브젝트)]
+    (if-not (오브젝트가-해당-장소에있는가? @atom_플레이어_사전_오브젝트_랑_장소 오브젝트 @atom_플레이어_현재장소)
+      [(format &quot;여기에는 `%s`(이/가) 없습니다&quot; 오브젝트이름)]
+      (do
+        (swap! atom_플레이어_사전_오브젝트_랑_장소 assoc 오브젝트 :주인공-인벤토리)
+        [(format &quot;`%s`(을/를) 집어들었습니다&quot; 오브젝트이름)]))))
+</code></pre>
+<p>이 함수는 오브젝트가 실제로 현재 위치의 바닥에 있는지 확인하고, 만약 그렇다면 <code>atom_플레이어_사전_오브젝트_랑_장소</code>를 갱신하고, 성공 여부를 알려주는 문장을 반환합니다.
+갱신할때 <a href="./03_data-cont.html">앞서 배운</a> <code>swap!</code> 함수를 활용했습니다.
+<code>atom_플레이어_사전_오브젝트_랑_장소</code>에 <code>assoc</code> 함수를 적용시키며, 인자로는 <code>오브젝트</code>와 <code>:주인공-인벤토리</code>를 넘겨주었습니다.</p>
+<p>이 함수도 앞선 <code>방향으로걷기!</code>와 같이 키워드를 인자로 받기에, <code>이동</code> 스펠처럼 좀 더 쉽게 사용할 수 있는 다른 스펠을 시전해 보겠습니다:</p>
+<pre><code class="language-clojure">(def-스펠 집어들기 [오브젝트]
+  `(오브젝트-집기! ~(keyword 오브젝트)))
+</code></pre>
+<p>이제 새로운 스펠을 사용해 봅시다:</p>
+<pre><code class="language-clojure">&gt; (집어들기 위스키)
+
+[&quot;`위스키병`(을/를) 집어들었습니다&quot;]
+</code></pre>
+<p>이제 유용한 함수 몇개 더 추가해 보도록 하겠습니다. 우선 현재 플레이어가 가지고 있는 오브젝트 목록을 볼 수 있는 함수를 만들어 보겠습니다:</p>
+<pre><code class="language-clojure">(defn 플레이어-오브젝트-리스트-가져오기 []
+  (filter #(오브젝트가-해당-장소에있는가? @atom_플레이어_사전_오브젝트_랑_장소 % :주인공-인벤토리) 상수_리스트_모든오브젝트))
+</code></pre>
+<p>이제 플레이어가 특정 오브젝트를 가지고 있는지 알려주는 함수를 만들어 보겠습니다:</p>
+<pre><code class="language-clojure">(defn 가지고있는가? [오브젝트]
+  (-&gt;&gt; (플레이어-오브젝트-리스트-가져오기)
+       (some #{오브젝트})
+       (some?)))
+</code></pre>
+<p><code>some</code>과 <code>some?</code> 함수가 보입니다. 이 둘의 차이점은 무엇일까요?</p>
+<ul>
+<li><code>some</code>: 함수를 콜렉션의 각 요소에 적용하여, 하나라도 <code>true</code>이면 참을 반환, 아니면 <code>nil</code>을 반환
+<ul>
+<li>ex) <code>(some even? '(1 2 3 4))</code> =&gt; true</li>
+</ul>
+</li>
+<li><code>some?</code>: nil이면 false, 아니면 true
+<ul>
+<li>ex) <code>(some? nil)</code> =&gt; <code>false</code></li>
+</ul>
+</li>
+</ul>
+<p>some함수의 반환값이 <code>true/false</code>가 아닌 <code>true/nil</code>이기에, <code>some?</code>을 사용하여 <code>true/false</code>로 변환해주는 것입니다.</p>
+<h2 id="짚고넘어갈것"><a class="header" href="#짚고넘어갈것">짚고넘어갈것</a></h2>
+<ul>
+<li><a href="https://clojuredocs.org/clojure.core/defmacro">defmacro</a>
+<ul>
+<li><code>'</code>: <a href="https://clojuredocs.org/clojure.core/quote">quote</a></li>
+<li>` : back-quoting</li>
+<li><code>~</code>: <a href="https://clojuredocs.org/clojure.core/unquote">unquote</a></li>
+<li><code>~@</code>: <a href="https://clojuredocs.org/clojure.core/unquote-splicing">unquote-splicing</a></li>
+</ul>
+</li>
+<li><a href="https://clojuredocs.org/clojure.core/if">keyword</a></li>
+<li><a href="https://clojuredocs.org/clojure.core/do">do</a></li>
+<li><a href="https://clojuredocs.org/clojure.core/assoc">assoc</a></li>
+<li><a href="https://clojuredocs.org/clojure.core/dissoc">dissoc</a></li>
+<li><a href="https://clojuredocs.org/clojure.core/some">some</a></li>
+<li><a href="https://clojuredocs.org/clojure.core/some_q">some?</a></li>
+</ul>
 
                     </main>
 
