@@ -13,6 +13,8 @@
   - [돌아다녀보기](lisperati/05_walking.md)
   - [스펠 외우기](lisperati/06_spels.md)
   - [특별한 액션 만들기](lisperati/07_actions.md)
-  - [부록](lisperati/08_addendum.md)
   - [치트](lisperati/09_cheat.md)
-  - [마치며](lisperati/10_ending.md)
+
+------
+
+- [마치며](ending.md)
