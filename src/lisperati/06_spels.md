@@ -92,12 +92,12 @@
 
 `some`과 `some?` 함수가 보입니다. 이 둘의 차이점은 무엇일까요?
 
-- `some`: 함수를 콜렉션의 각 요소에 적용하여, 하나라도 `true`이면 참을 반환, 아니면 `nil`을 반환
-  - ex) `(some even? '(1 2 3 4))` => true
+- `some`: 함수를 콜렉션의 각 요소에 적용하여, 평가 결과가 nil/fase가 아닌게 나오면 그 평가결과를 반환합니다.
+  - ex) `(some even? '(1 2 3 4))` => `true`, `(some even? '(1 3))` => `nil`
 - `some?`: nil이면 false, 아니면 true
   - ex) `(some? nil)` => `false`
 
-some함수의 반환값이 `true/false`가 아닌 `true/nil`이기에, `some?`을 사용하여 `true/false`로 변환해주는 것입니다.
+some함수의 반환값이 `nil`이 나올 수 있기에, 마지막에 `some?`을 사용하여 `true/false`로 변환해 주었습니다.
 
 ## 짚고넘어갈것
 
