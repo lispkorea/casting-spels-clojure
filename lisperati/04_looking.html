@@ -182,10 +182,10 @@
 <ul>
 <li><a href="https://www.lisperati.com/looking.html">원문</a></li>
 </ul>
-<p>이제 게임 커맨드를 만들어 보도록 하겠습니다.</p>
+<p>이제 게임에 사용할 게임 커맨드들을 만들어 보도록 하겠습니다.</p>
 <p>가장 먼저 필요한 게임 커맨드는 현재 있는 장소에 대해 알려주는 <code>둘러보기</code> 커맨드입니다.
-그렇다면 게임 세상에서의 장소를 설명하는 함수에 무엇을 넣어야 할까요?
-설명하고자 하는 장소를 알고 있어야 하며, 지도를 보고 지도에서 해당 장소를 찾을 수 있어야 합니다.</p>
+그렇다면 게임 세상에서의 장소를 설명하는 커맨드에 어떤 정보들을 넣어야 할까요?
+설명하고자 하는 장소를 지도에서 찾을 수 있어야 합니다.</p>
 <p>이 함수가 바로 그 역할을 합니다:</p>
 <pre><code class="language-clojure">(defn 정보얻기-장소 [지도 장소]
   (-&gt; 지도
@@ -196,9 +196,6 @@
 ;; (defn 정보얻기-장소 [지도 장소]
 ;;   (:설명 (get 지도 장소)))
 </code></pre>
-<p>함수 이름은 <code>정보얻기-장소</code>이며 <code>지도</code>와 <code>장소</code>라는 두 개의 매개 변수를 사용합니다.
-이제 장소가 거실이라고 가정해 봅시다.</p>
-<p>거실의 설명을 찾으려면, 먼저 지도에서 거실을 가리키는 지점을 찾아야 합니다.</p>
 <ul>
 <li><code>-&gt;</code>는 <code>thread-first</code>라고 불리는 매크로입니다.
 <ul>
@@ -214,6 +211,9 @@
 </ul>
 </li>
 </ul>
+<p>함수 이름은 <code>정보얻기-장소</code>이며 <code>지도</code>와 <code>장소</code>라는 두 개의 매개 변수를 사용합니다.
+이제 장소가 거실이라고 가정해 봅시다.
+거실의 설명을 찾으려면, 먼저 지도에서 거실을 가리키는 지점을 찾아야 합니다.</p>
 <p>이제 앞서 정의한 상수와 함수를 Lisp 프롬프트를 사용하여 테스트해 보겠습니다.</p>
 <pre><code class="language-clojure">&gt; (정보얻기-장소 상수_전체지도 :거실)
 
@@ -243,7 +243,7 @@
 </ul>
 </li>
 </ul>
-<p>이러한 잔인한 제한을 고려할 때 실제로 유용한 코드를 작성할 수 있는지 궁금할 수 있습니다... 대답은 <strong>예</strong> 입니다.</p>
+<p>이러한 잔인한 제약을 따른다고해서 실제로 유용한 코드를 작성할 수 있는지 궁금할 수 있을 것입니다... 대답은 <strong>예</strong> 입니다.</p>
 <p>그렇다면 이러한 규칙을 따라야 하는 이유는 무엇일까요?</p>
 <p>매우 중요한 이유가 하나 있습니다: 이 스타일로 코드를 작성하면 프로그램에 <strong>참조 투명성(referential transparency)</strong> 이 부여됩니다. 즉, 동일한 매개변수로 호출된 특정 코드가 언제 호출해도 항상 동일한 결과를 반환하고 동일한 작업을 수행합니다. 이는 프로그래밍 오류를 줄일 수 있으며 대다수의 경우 프로그래머의 생산성을 향상시킬 수 있다고 여겨집니다.</p>
 <p>물론 함수형 스타일에 맞지 않거나 사용자 또는 외부 세계와 소통할 수 밖에 없는 함수들이 항상 존재할 것입니다.
@@ -260,7 +260,7 @@
 <li><code>seq</code>는 <code>sequence</code>의 약자로 여기서는 사전(dictionary)의 키와 값의 쌍을 시퀀스로 변환합니다.</li>
 <li><code>first</code>는 시퀀스의 첫 번째 요소를 반환합니다.</li>
 </ul>
-<p>자 이제 <code>[:서쪽 [:문 :정원]]</code>와 같은 모양 즉 <code>[방향 [통로 목적지]]</code>와 같은 형태를 경로라고 부르겠습니다.
+<p>자 이제부터 <code>[:서쪽 [:문 :정원]]</code>와 같은 모양 즉 <code>[방향 [통로 목적지]]</code>와 같은 형태를 경로라고 부르겠습니다.
 이 경로를 설명하는 함수를 작성해 보겠습니다.</p>
 <pre><code class="language-clojure">(defn 정보얻기-경로 [경로]
   (let [[방향 [통로 목적지]] 경로
@@ -321,7 +321,8 @@
 <p>이 새로운 함수틀 테스트 해봅시다:</p>
 <pre><code class="language-clojure">&gt; (정보얻기-경로들 상수_전체지도 :거실)
 
-[&quot;`서쪽`으로 가는 문이 있다&quot; &quot;`위층`으로 가는 계단이 있다&quot;]
+[&quot;`서쪽`으로 가는 문이 있다&quot;
+ &quot;`위층`으로 가는 계단이 있다&quot;]
 </code></pre>
 <p>훌륭합니다!</p>
 <p>아직 한 가지 더 정보를 얻어야만 하는 것이 남아있습니다: 우리가 서 있는 장소의 바닥에 있는 오브젝트에 대한 정보 역시 얻을 수 있도록 합시다.</p>
@@ -354,9 +355,10 @@ true
 <li>ex) <code>((fn [x] (* x x)) 2)</code> -&gt; <code>4</code></li>
 </ul>
 </li>
-<li><code>let-fn</code>
+<li><code>letfn</code>
 <ul>
-<li>ex) <code>(let-fn [(square [x] (* x x))] (square 2))</code> -&gt; <code>4</code></li>
+<li><code>letfn</code>은 <code>let</code>과 유사하지만 함수를 정의하는데 씁니다.</li>
+<li>ex) <code>(letfn [(square [x] (* x x))] (square 2))</code> -&gt; <code>4</code></li>
 </ul>
 </li>
 <li><code>filter</code>
@@ -383,7 +385,7 @@ true
        (flatten)
        (vec))))
 </code></pre>
-<p><code>둘러보기</code>는 인자를 안받거나 4개를 받습니다. <code>defn</code>은 이와같이 함수오버로딩(function overloading)을 지원합니다.</p>
+<p><code>둘러보기</code>는 인자를 아에 안받거나 4개를 받습니다. <code>defn</code>은 이와같이 인자에 갯수가 달라짐에 따른 <strong>함수오버로딩(function overloading)</strong> 을 지원합니다.</p>
 <ul>
 <li><code>flatten</code>
 <ul>
@@ -415,6 +417,7 @@ true
 <li><a href="https://clojuredocs.org/clojure.core/name">name</a></li>
 <li><a href="https://clojuredocs.org/clojure.core/format">format</a></li>
 <li>고차 함수(high-order function)</li>
+<li>함수오버로딩(function overloading)</li>
 <li><a href="https://clojuredocs.org/clojure.core/map">map</a></li>
 <li><a href="https://clojuredocs.org/clojure.core/mapv">mapv</a></li>
 <li><a href="https://clojuredocs.org/clojure.core/fn">fn</a></li>

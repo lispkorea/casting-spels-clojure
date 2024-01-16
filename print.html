@@ -182,10 +182,10 @@
 <ul>
 <li><a href="https://www.lisperati.com/casting.html">원문</a></li>
 </ul>
-<p>Lisp를 만져본 사람이라면, 이 언어는 다른 프로그래밍 언어들과 매우 다르다고 말할 것입니다.
-실로 놀라운 방식으로 많이 다릅니다.
-이 만화책을 통해 Lisp의 독특한 디자인이 어떻게 이 언어를 강력하게 만드는지 배울 수 있습니다</p>
+<p>리스프(Lisp, 리슾)를 아는 사람이라면, 리스프가 다른 프로그래밍 언어들과 매우 다르다고 말할 것입니다.
+이는 실로 놀라울 정도로 많이 다릅니다. 이 만화를 통해 리스프가 얼마만큼 강력한지, 리스프의 독특한 디자인을 통해 배워보도록 하겠습니다.</p>
 <p><img src="lisperati/../res/different.jpg" alt="" /></p>
+<p>리스프 언어에는 여러가지 종류가 있는데, 그 중 클로저로 진행하도록 하겠습니다.</p>
 <p><code>clj</code> 명령어를 통해 클로저의 REPL을 실행합니다.</p>
 <pre><code class="language-clojure">$ clj
 Clojure 1.11.1
@@ -209,6 +209,7 @@ spel=&gt;
 </ul>
 <h2 id="짚고넘어갈것"><a class="header" href="#짚고넘어갈것">짚고넘어갈것</a></h2>
 <ul>
+<li><a href="https://clojure.org">클로저(Clojure)</a></li>
 <li>clj 명령어</li>
 <li>REPL 종료법</li>
 </ul>
@@ -217,20 +218,21 @@ spel=&gt;
 <li><a href="https://www.lisperati.com/syntax.html">원문</a></li>
 </ul>
 <p>모든 컴퓨터 언어는 <strong>신택스(Syntax, 문법/구조론)</strong> 와 <strong>시맨틱(Semantic, 의미론)</strong> 으로 이루어진 코드를 가지고 있습니다.</p>
-<p>프로그래밍 언어의 신택스는 기본 골격입니다. 컴파일러가 프로그램에서 무엇이 무엇인지 알 수 있도록 프로그램이 따라야만 합니다. 이로써 무엇이 함수인지, 변수인지 등을 알 수 있습니다. 프로그램의 시맨틱은 좀 더 &quot;랜덤&quot;한 내용을 다룹니다. 무엇이 사용가능한 명령어인지, 프로그램의 특정 지점에서 어떤 변수가 허용되는지와 같은 것들이 있습니다.</p>
+<p><strong>신택스</strong> 는 프로그램에서 컴파일러가 무엇이 무엇인지 알 수 있도록 따라야만 하는 프로그래밍 언어의 기본 빼대입니다. 이로써 무엇이 함수인지, 변수인지 등을 알 수 있습니다. </p>
+<p><strong>시맨틱</strong> 은 프로그램의 좀 더 &quot;랜덤&quot;한 내용을 다룹니다. 프로그램의 특정 지점에서 어떤 변수가 사용가능한지 아닌지 같은 것들이 있습니다.</p>
 <div class="table-wrapper"><table><thead><tr><th>syntax &amp; semantics</th><th></th></tr></thead><tbody>
 <tr><td>Syntax</td><td>어떻게 구성되어야 하는가</td></tr>
 <tr><td>Semantics</td><td>어떻게 동작하는가</td></tr>
 </tbody></table>
 </div>
-<p>리스프(Lisp, 리슾)의 첫 번째로 특별한 부분은 주요 프로그래밍 언어 중 가장 간결한 신택스를 가지고 있다는 점입니다. 기본적으로 리스프 신택스는 리스프 컴파일러에게 넘겨주는 텍스트를 리스트(list)로 넘기도록 강제합니다. 필요에 따라 중첩된 리스트 역시 가능합니다.</p>
+<p>리스프의 첫 번째로 특별한 부분은 메이저 프로그래밍 언어 중 가장 간결한 신택스를 가지고 있다는 점입니다. 기본적으로 리스프 신택스는 리스프 컴파일러에게 넘겨주는 텍스트를 리스트(list)로 넘기도록 강제합니다. 필요에 따라 중첩된 리스트 역시 가능합니다.</p>
 <p>리스트의 시작과 끝은 괄호로 되어있습니다:</p>
 <pre><code class="language-clojure">;; 쌍번점(`;`)는 주석을 의미합니다.
 
 (list 1 2 3)
 </code></pre>
 <p><img src="lisperati/../res/list.jpg" alt="" /></p>
-<p>추가적으로, 리스프 컴파일러는 코드를 읽을때 두가지 모드를 사용합니다: 코드 모드와 데이터 모드</p>
+<p>추가적으로, 리스프 컴파일러는 두가지 모드를 사용하여 코드를 읽습니다: 코드 모드와 데이터 모드</p>
 <p>데이터 모드일때, 리스트에 아무거나 넣을 수 있습니다. 그러나, 컴파일러는 코드 모드에서 코드를 읽기 시작합니다.</p>
 <div class="table-wrapper"><table><thead><tr><th>모드</th><th>리스트</th></tr></thead><tbody>
 <tr><td>코드</td><td>리스트를 <code>코드</code>로 읽고 실행된다</td></tr>
@@ -266,7 +268,7 @@ spel=&gt;
 <p><img src="lisperati/../res/objects.jpg" alt="" /></p>
 <p>이제 게임 세상에 쓰일 오브젝트들을 정의해 봤습니다. 이제 더 나아가서 게임 세상의 지도를 정의해 보겠습니다. 여기에 게임 세상이 어떻게 생겼는지 나와있는 그림이 있습니다:</p>
 <p><img src="lisperati/../res/world.jpg" alt="" /></p>
-<p>이 단순한 게임에는 3개의 다른 장소가 있습니다: <code>거실</code>과 <code>다락방</code>을 가진 집이 있으며 그리고 <code>정원</code>도 있습니다.</p>
+<p>이 간단한 게임에는 3개의 다른 장소가 있습니다: <code>거실</code>과 <code>다락방</code>을 가진 집이 있으며 그리고 <code>정원</code>도 있습니다.</p>
 <p>이제 게임 세상을 표현하는 <code>상수_전체지도</code>라는 새로운 변수를 정의해 봅시다:</p>
 <pre><code class="language-clojure">(def 상수_전체지도
   {:거실
@@ -303,6 +305,7 @@ spel=&gt;
 <tr><td>사전(dictionary, 딕션어리)</td><td><code>{ }</code></td><td><code>{:a 1 :b 2 :c 3}</code></td><td>O(1)</td></tr>
 </tbody></table>
 </div>
+<p>그리고 문자열은 따옴표(<code>&quot; &quot;</code>)로 둘러싸여 있습니다.</p>
 <p>이제 지도와 오브젝트 목록이 있으니, 각각의 오브젝트가 지도상의 장소 어디에 있는지 알 수 있는 변수를 선언해 봅시다:</p>
 <pre><code class="language-clojure">(def 상수_사전_오브젝트_랑_장소
   {:위스키병 :거실
@@ -324,9 +327,10 @@ spel=&gt;
 <li><a href="https://clojuredocs.org/clojure.core/def">def</a></li>
 <li>키워드(<code>:</code>)</li>
 <li>리스트(<code>( )</code>)</li>
-<li>데이터를 간결하게 추리기</li>
-<li>사전(<code>{ }</code>)</li>
 <li>벡터(<code>[ ]</code>)</li>
+<li>사전(<code>{ }</code>)</li>
+<li>문자열(<code>&quot; &quot;</code>)</li>
+<li>데이터를 간결하게 추리기</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="게임-세상을-위한-데이타-정의하기---계속"><a class="header" href="#게임-세상을-위한-데이타-정의하기---계속">게임 세상을 위한 데이타 정의하기 - 계속</a></h1>
 <p>앞서 <code>def</code>를 이용해서 정의한 변수는 상수라고 했습니다. 즉, 한번 정의되면 그 값을 바꿀 수 없습니다.</p>
@@ -394,10 +398,10 @@ spel=&gt;
 <ul>
 <li><a href="https://www.lisperati.com/looking.html">원문</a></li>
 </ul>
-<p>이제 게임 커맨드를 만들어 보도록 하겠습니다.</p>
+<p>이제 게임에 사용할 게임 커맨드들을 만들어 보도록 하겠습니다.</p>
 <p>가장 먼저 필요한 게임 커맨드는 현재 있는 장소에 대해 알려주는 <code>둘러보기</code> 커맨드입니다.
-그렇다면 게임 세상에서의 장소를 설명하는 함수에 무엇을 넣어야 할까요?
-설명하고자 하는 장소를 알고 있어야 하며, 지도를 보고 지도에서 해당 장소를 찾을 수 있어야 합니다.</p>
+그렇다면 게임 세상에서의 장소를 설명하는 커맨드에 어떤 정보들을 넣어야 할까요?
+설명하고자 하는 장소를 지도에서 찾을 수 있어야 합니다.</p>
 <p>이 함수가 바로 그 역할을 합니다:</p>
 <pre><code class="language-clojure">(defn 정보얻기-장소 [지도 장소]
   (-&gt; 지도
@@ -408,9 +412,6 @@ spel=&gt;
 ;; (defn 정보얻기-장소 [지도 장소]
 ;;   (:설명 (get 지도 장소)))
 </code></pre>
-<p>함수 이름은 <code>정보얻기-장소</code>이며 <code>지도</code>와 <code>장소</code>라는 두 개의 매개 변수를 사용합니다.
-이제 장소가 거실이라고 가정해 봅시다.</p>
-<p>거실의 설명을 찾으려면, 먼저 지도에서 거실을 가리키는 지점을 찾아야 합니다.</p>
 <ul>
 <li><code>-&gt;</code>는 <code>thread-first</code>라고 불리는 매크로입니다.
 <ul>
@@ -426,6 +427,9 @@ spel=&gt;
 </ul>
 </li>
 </ul>
+<p>함수 이름은 <code>정보얻기-장소</code>이며 <code>지도</code>와 <code>장소</code>라는 두 개의 매개 변수를 사용합니다.
+이제 장소가 거실이라고 가정해 봅시다.
+거실의 설명을 찾으려면, 먼저 지도에서 거실을 가리키는 지점을 찾아야 합니다.</p>
 <p>이제 앞서 정의한 상수와 함수를 Lisp 프롬프트를 사용하여 테스트해 보겠습니다.</p>
 <pre><code class="language-clojure">&gt; (정보얻기-장소 상수_전체지도 :거실)
 
@@ -455,7 +459,7 @@ spel=&gt;
 </ul>
 </li>
 </ul>
-<p>이러한 잔인한 제한을 고려할 때 실제로 유용한 코드를 작성할 수 있는지 궁금할 수 있습니다... 대답은 <strong>예</strong> 입니다.</p>
+<p>이러한 잔인한 제약을 따른다고해서 실제로 유용한 코드를 작성할 수 있는지 궁금할 수 있을 것입니다... 대답은 <strong>예</strong> 입니다.</p>
 <p>그렇다면 이러한 규칙을 따라야 하는 이유는 무엇일까요?</p>
 <p>매우 중요한 이유가 하나 있습니다: 이 스타일로 코드를 작성하면 프로그램에 <strong>참조 투명성(referential transparency)</strong> 이 부여됩니다. 즉, 동일한 매개변수로 호출된 특정 코드가 언제 호출해도 항상 동일한 결과를 반환하고 동일한 작업을 수행합니다. 이는 프로그래밍 오류를 줄일 수 있으며 대다수의 경우 프로그래머의 생산성을 향상시킬 수 있다고 여겨집니다.</p>
 <p>물론 함수형 스타일에 맞지 않거나 사용자 또는 외부 세계와 소통할 수 밖에 없는 함수들이 항상 존재할 것입니다.
@@ -472,7 +476,7 @@ spel=&gt;
 <li><code>seq</code>는 <code>sequence</code>의 약자로 여기서는 사전(dictionary)의 키와 값의 쌍을 시퀀스로 변환합니다.</li>
 <li><code>first</code>는 시퀀스의 첫 번째 요소를 반환합니다.</li>
 </ul>
-<p>자 이제 <code>[:서쪽 [:문 :정원]]</code>와 같은 모양 즉 <code>[방향 [통로 목적지]]</code>와 같은 형태를 경로라고 부르겠습니다.
+<p>자 이제부터 <code>[:서쪽 [:문 :정원]]</code>와 같은 모양 즉 <code>[방향 [통로 목적지]]</code>와 같은 형태를 경로라고 부르겠습니다.
 이 경로를 설명하는 함수를 작성해 보겠습니다.</p>
 <pre><code class="language-clojure">(defn 정보얻기-경로 [경로]
   (let [[방향 [통로 목적지]] 경로
@@ -533,7 +537,8 @@ spel=&gt;
 <p>이 새로운 함수틀 테스트 해봅시다:</p>
 <pre><code class="language-clojure">&gt; (정보얻기-경로들 상수_전체지도 :거실)
 
-[&quot;`서쪽`으로 가는 문이 있다&quot; &quot;`위층`으로 가는 계단이 있다&quot;]
+[&quot;`서쪽`으로 가는 문이 있다&quot;
+ &quot;`위층`으로 가는 계단이 있다&quot;]
 </code></pre>
 <p>훌륭합니다!</p>
 <p>아직 한 가지 더 정보를 얻어야만 하는 것이 남아있습니다: 우리가 서 있는 장소의 바닥에 있는 오브젝트에 대한 정보 역시 얻을 수 있도록 합시다.</p>
@@ -566,9 +571,10 @@ true
 <li>ex) <code>((fn [x] (* x x)) 2)</code> -&gt; <code>4</code></li>
 </ul>
 </li>
-<li><code>let-fn</code>
+<li><code>letfn</code>
 <ul>
-<li>ex) <code>(let-fn [(square [x] (* x x))] (square 2))</code> -&gt; <code>4</code></li>
+<li><code>letfn</code>은 <code>let</code>과 유사하지만 함수를 정의하는데 씁니다.</li>
+<li>ex) <code>(letfn [(square [x] (* x x))] (square 2))</code> -&gt; <code>4</code></li>
 </ul>
 </li>
 <li><code>filter</code>
@@ -595,7 +601,7 @@ true
        (flatten)
        (vec))))
 </code></pre>
-<p><code>둘러보기</code>는 인자를 안받거나 4개를 받습니다. <code>defn</code>은 이와같이 함수오버로딩(function overloading)을 지원합니다.</p>
+<p><code>둘러보기</code>는 인자를 아에 안받거나 4개를 받습니다. <code>defn</code>은 이와같이 인자에 갯수가 달라짐에 따른 <strong>함수오버로딩(function overloading)</strong> 을 지원합니다.</p>
 <ul>
 <li><code>flatten</code>
 <ul>
@@ -627,6 +633,7 @@ true
 <li><a href="https://clojuredocs.org/clojure.core/name">name</a></li>
 <li><a href="https://clojuredocs.org/clojure.core/format">format</a></li>
 <li>고차 함수(high-order function)</li>
+<li>함수오버로딩(function overloading)</li>
 <li><a href="https://clojuredocs.org/clojure.core/map">map</a></li>
 <li><a href="https://clojuredocs.org/clojure.core/mapv">mapv</a></li>
 <li><a href="https://clojuredocs.org/clojure.core/fn">fn</a></li>
@@ -638,8 +645,8 @@ true
 <ul>
 <li><a href="https://www.lisperati.com/walking.html">원문</a></li>
 </ul>
-<p>이제 세상을 볼 수 있게 되었으니 그 안에서 걸어 다닐 수 있는 코드를 작성해 보겠습니다.
-편의상 상태를 변경하는 함수 이름의 끝에 <code>!</code>를 붙이도록 하겠습니다.</p>
+<p>이제 게임 세상에 무엇이 있는지 알 수 있게 되었으니, 이 안에서 걸어 다닐 수 있는 코드를 작성해 보겠습니다.
+편의상 상태를 변경하는 (사이드 이펙트)함수 이름의 끝에 <code>!</code>를 붙이도록 하겠습니다.</p>
 <p>함수형 스타일이 아닌 사이드 이펙트를 지닌 <code>방향으로걷기!</code> 함수는 방향을 지정하고 그 방향으로 걸어갈 수 있게 해줍니다.</p>
 <pre><code class="language-clojure">(defn 방향으로걷기! [방향]
   (let [다음으로 (-&gt;&gt; atom_플레이어_현재장소
@@ -678,8 +685,8 @@ true
 <ul>
 <li><a href="https://www.lisperati.com/spels.html">원문</a></li>
 </ul>
-<p>이제 리스프의 놀랍도록 강력한 기능을 배워보겠습니다: SPEL 만들기!</p>
-<p>스펠(마법, <code>SPEL</code>)은 <code>S</code>emantic <code>P</code>rogram <code>E</code>nhancement <code>L</code>ogic의 줄임말로, 컴퓨터 코드의 세계 내부에 새로운 동작을 생성하여 필요에 맞게 동작을 사용자 정의하기 위해 기본적인 수준에서 Lisp 언어를 변경하는 것으로, Lisp에서 가장 마법처럼 보이는 부분입니다.
+<p>자, 이제 리스프의 놀랍도록 강력한 기능을 배워보겠습니다: SPEL 만들기!</p>
+<p>스펠(마법, <code>SPEL</code>)은 <code>S</code>emantic <code>P</code>rogram <code>E</code>nhancement <code>L</code>ogic의 줄임말로, :TODO 컴퓨터 코드의 세계 내부에 새로운 동작을 생성하여 필요에 맞게 동작을 사용자 정의하기 위해 기본적인 수준에서 Lisp 언어를 변경하는 것으로, 리스프에서 가장 마법처럼 보이는 부분입니다.
 스펠을 사용하려면 먼저 리스프 컴파일러 내에서 스펠을 활성화 시켜야 합니다.</p>
 <pre><code class="language-clojure">(defmacro def-스펠 [&amp; rest]
   `(defmacro ~@rest))
@@ -774,7 +781,8 @@ true
 <ul>
 <li><a href="https://www.lisperati.com/actions.html">원문</a></li>
 </ul>
-<p>이제 할 일이 하나만 더 남았으니 게임이 완성됩니다: 플레이어가 게임에서 승리하기 위해 수행해야 하는 몇 가지 특별한 행동을 게임에 추가하세요. 첫 번째 커맨드은 플레이어가 다락방에 있는 양동이에 체인을 용접하는 것입니다:</p>
+<p>이제 한단계만 더 넘으면 게임이 완성됩니다: 플레이어가 게임에서 승리하기 위해 수행해야 하는 몇 가지 특별한 행동을 게임에 추가합니다. 
+첫 번째 커맨드는 다락방에 있는 양동이에 사슬을 용접하는 것입니다:</p>
 <pre><code class="language-clojure">(defn 용접 [오브젝트 대상]
   (if-not (and (= @atom_플레이어_현재장소 :다락방)
                (= 오브젝트 :사슬)
@@ -787,15 +795,15 @@ true
         (reset! atom_플레이어_사슬을_용접하였는가 true)
         [&quot;`사슬`이 `양동이`에 단단히 용접되었습니다.&quot;]))))
 </code></pre>
-<p>먼저 이 작업을 이미 수행했는지 여부를 알 수 있는 새로운 전역 변수를 만들었습니다. 다음으로 용접에 적합한 조건이 모두 갖추어졌는지 확인하고 용접할 수 있는 용접 함수를 만듭니다.</p>
+<p>먼저 이 작업을 이미 수행했는지 여부를 알 수 있는 새로운 전역 변수를 만들었습니다. 다음으로 용접에 적합한 조건이 모두 갖추어졌는지 확인하고 용접할 수 있는 용접 커맨드를 만들었습니다.</p>
 <p><img src="lisperati/../res/weld.jpg" alt="" /></p>
 <p>새로운 커맨드를 사용해 봅시다:</p>
 <pre><code class="language-clojure">&gt; (용접 :사슬 :양동이)
 
 [&quot;그렇게 용접 할 수는 없습니다&quot;]
 </code></pre>
-<p>이런... 우리는 양동이나 체인이 없습니다. 그리고 주위에 용접할만 장치도 없습니다... 뭐 괜찮습니다...</p>
-<p>이제 체인을 건 양동이로 우물을 기르는 커맨드를 만들어 봅시다:</p>
+<p>이런... 우리는 양동이나 사슬이 없습니다. 그리고 주위에 용접할만 장치도 없습니다... 뭐 괜찮습니다...</p>
+<p>이제 사슬을 건 양동이로 우물을 기르는 커맨드를 만들어 봅시다:</p>
 <pre><code class="language-clojure">(defn 물기르기 [오브젝트 대상]
   (if-not (and (= @atom_플레이어_현재장소 :정원)
                (= 오브젝트 :양동이)
@@ -808,7 +816,7 @@ true
         (reset! atom_플레이어_양동이를_채웠는가 true)
         [&quot;`양동이`에 물을 가득 채웠습니다.&quot;]))))
 </code></pre>
-<p>주의깊게 살펴봤다면 이 커맨드가 앞선 <code>용접</code> 커맨드와 매우 유사하다는 것을 알 수 있습니다... 두 커맨드 모두 오브젝트, 대상, 장소를 확인하는데 두 커맨드를 하나의 함수로 합치기에는 무리처럼 보입니다. 유감스럽습니다... ...만 리스프이기에 단순히 함수를 추가시켜 나가는게 아니라, 스펠을 외울 수 있습니다! 다음 스펠을 만들어 봅시다:</p>
+<p>눈치챘는지 모르겠지만 이 커맨드가 앞선 <code>용접</code> 커맨드와 매우 유사하다는 것을 알 수 있습니다... 두 커맨드 모두 오브젝트, 대상, 장소를 확인하는데 두 커맨드를 하나의 함수로 합치기에는 무리처럼 보입니다. 유감스럽습니다... ...만 리스프이기에 단순히 함수를 추가시켜 나가는게 아니라, 스펠을 외울 수 있습니다! 다음 스펠을 만들어 봅시다:</p>
 <pre><code class="language-clojure">(def-스펠 def-액션 [커맨드명 [액션오브젝트 액션대상] 액션장소 &amp; 액션본체]
   (let [키워드_액션오브젝트# (keyword 액션오브젝트)
         키워드_액션대상#     (keyword 액션대상)]
@@ -822,7 +830,7 @@ true
             ~[(str &quot;그렇게 &quot; '~커맨드명 &quot;할 수는 없습니다&quot;)]
             ~@'~액션본체)))))
 </code></pre>
-<p>헛웃음이 나올 정도로 복잡한 스펠입니다. 따옴표, 역따옴표, 쉼표 및 기타 이상한 기호(<code>#</code>, `, <code>~</code>, <code>~@</code>)가  // 목록을 흔드는 것보다 더 많이 포함되어 있습니다.
+<p>헛웃음이 나올 정도로 복잡한 스펠입니다. 따옴표, 역따옴표, 쉼표 및 기타 이상한 기호(<code>#</code>, `, <code>~</code>, <code>~@</code>)가  :TODO // 목록을 흔드는 것보다 더 많이 포함되어 있습니다.
 뿐만 아니라 스펠이 스펠을 만들고 있습니다!
 숙련된 리스프 프로그래머라도 이런 괴물을 만들기 위해선 약간의 고민을 해야 할 것입니다.</p>
 <p><img src="lisperati/../res/game_action.jpg" alt="" /></p>
@@ -837,8 +845,8 @@ true
       (reset! atom_플레이어_사슬을_용접하였는가 true)
       [&quot;`사슬`이 `양동이`에 단단히 용접되었습니다.&quot;])))
 </code></pre>
-<p>이 커맨드가 얼마나 쉽게 이해할 수 있게 됬는지 보세요. 액션 스펠을 사용하면 원하는 내용을 간결하고 정확하게 작성할 수 있습니다. 마치 게임 커맨드를 만들기 위해 자신만의 컴퓨터 언어를 만든 것과 같습니다.
-스펠로 자신만의 의사 언어를 만드는 것을 <strong>도메인 특정 언어 프로그래밍(DSL, Domain Specific Language)</strong> 이라고 하는데, 이는 빠르고 우아하게 프로그래밍할 수 있는 매우 강력한 접근법입니다.</p>
+<p>이 얼마나 쉽게 이해할 수 있게 됬나요. 액션 스펠을 사용하면 원하는 내용을 간결하고 정확하게 작성할 수 있습니다. 마치 게임 커맨드를 만들기 위해 자신만의 컴퓨터 언어를 만든 것과 같습니다.
+스펠과 같이 자신만의 의사 언어를 만드는 것을 <strong>도메인 특정 언어 프로그래밍(DSL, Domain Specific Language)</strong> 라고 하는데, 이는 빠르고 우아하게 프로그래밍 할 수 있는 매우 강력한 접근법입니다.</p>
 <pre><code class="language-clojure">&gt; (용접 사슬 양동이)
 
 [&quot;그렇게 용접 할 수는 없습니다&quot;]
@@ -872,17 +880,25 @@ true
      &quot;그는 (저탄수)도넛을 `당신`에게 건냈습니다.&quot;
      &quot;성공! 게임 끝.&quot;]))
 </code></pre>
+<ul>
+<li><code>cond</code>는 if와 비슷하지만 여러가지 조건과 행동을 가질 수 있습니다.
+<ul>
+<li>ex) <code>(cond (= 1 2) &quot;1과 2는 같습니다.&quot; (= 1 1) &quot;1과 1은 같습니다.&quot; :else &quot;모든 조건이 거짓입니다.&quot;)</code> -&gt; <code>&quot;1과 1은 같습니다.&quot;</code></li>
+</ul>
+</li>
+</ul>
 <p><img src="lisperati/../res/donut.jpg" alt="" /></p>
 <p><strong>마침내 텍스트 어드벤처 게임이 완성되었습니다!</strong></p>
 <ul>
 <li>게임에 대한 전체 공략을 보려면 <a href="lisperati/./09_cheat.html">여기</a>를 클릭합니다.</li>
-<li>소스 코드의 사본을 보려면 <a href="lisperati/">여기</a>를 클릭합니다.</li>
+<li>소스 코드의 사본을 보려면 <a href="lisperati/../code/src/spel.clj">여기</a>를 클릭합니다.</li>
 </ul>
 <p>이 튜토리얼을 최대한 간단하게 만들기 위해 리스프의 동작 방식에 대한 세부 사항들을 건너띄었으므로, 이제 그것들이 무엇인지 한번 살펴 보도록 하겠습니다...</p>
 <h2 id="짚고넘어갈것-7"><a class="header" href="#짚고넘어갈것-7">짚고넘어갈것</a></h2>
 <ul>
 <li><a href="https://clojuredocs.org/clojure.core/and">and</a></li>
 <li><a href="https://clojuredocs.org/clojure.core/str">str</a></li>
+<li><a href="https://clojuredocs.org/clojure.core/cond">cond</a></li>
 <li>nested macro</li>
 <li>도메인 특정 언어 프로그래밍(DSL, Domain Specific Language)</li>
 </ul>
