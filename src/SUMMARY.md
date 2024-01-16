@@ -1,6 +1,6 @@
 # Summary
 
-- [첫화면](Index.md)
+- [들어가면서](Index.md)
 
 # Casting SPELs (Clojure)
 

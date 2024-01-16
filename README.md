@@ -1,7 +1,7 @@
 # Casting SPELs (Clojure)
 
 - <https://lispkorea.github.io/casting-spels-clojure>
-- <https://www.lisperati.com/casting.html> 구조 따르면서 Clojure로 의역
+- <https://www.lisperati.com/casting.html> 구조 따르면서 Clojure로 편역
 
 ## mdBook
 
